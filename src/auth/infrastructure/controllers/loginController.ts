@@ -1,8 +1,10 @@
-import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { Request, Response } from 'express';
 import { LoginService } from '../../application/services/loginService';
+import { ComparePasswordService } from '../helpers/comparePassword';
 import { secret } from '../../domain/constants/secret';
+
+const compareCredentials = new ComparePasswordService();
 
 export class LoginController {
     constructor(readonly loginService: LoginService) { }
@@ -21,7 +23,7 @@ export class LoginController {
                 return;
             }
 
-            const isPasswordValid = this.compareCredentials(
+            const isPasswordValid = compareCredentials.comparePassword(
                 credentials.password,
                 user.password
             );
@@ -37,6 +39,7 @@ export class LoginController {
             res.status(200).json({
                 status: 'success',
                 msg: 'Acceso exitoso al sistema',
+                email: user.email,
                 token
             });
         } catch (error) {
@@ -46,10 +49,5 @@ export class LoginController {
                 msg: error,
             });
         }
-    }
-
-    private compareCredentials(password: string, passwordRequest: string): boolean {
-        const correctPassword = bcrypt.compareSync(password, passwordRequest);
-        return correctPassword;
     }
 }

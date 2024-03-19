@@ -27,6 +27,7 @@
     "jsonwebtoken": "^9.0.2",
     "mysql": "^2.18.1",
     "mysql2": "^3.9.2",
-    "nodemailer": "^6.9.12"
+    "nodemailer": "^6.9.12",
+    "zod": "^3.22.4"
   }
 }
