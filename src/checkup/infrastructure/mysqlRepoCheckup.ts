@@ -12,9 +12,9 @@ export class MysqlCheckupRepository implements CheckupRepository {
                 (checkup: any) => (
                     new Checkup(
                         checkup.id,
-                        checkup.username,
-                        checkup.heart_rate,
-                        checkup.oxigen_sat,
+                        checkup.patient,
+                        checkup.heartRate,
+                        checkup.spo2,
                         checkup.temperature
                     )
                 )
@@ -31,9 +31,9 @@ export class MysqlCheckupRepository implements CheckupRepository {
             const [result]: any = await query(sql, params);
             return new Checkup(
                 result[0].id,
-                result[0].username,
-                result[0].heart_rate,
-                result[0].oxigen_sat,
+                result[0].patient,
+                result[0].heartRate,
+                result[0].spo2,
                 result[0].temperature
             );
         } catch (error) {
@@ -42,17 +42,17 @@ export class MysqlCheckupRepository implements CheckupRepository {
     }
 
     async createCheckup(
-        username: string,
-        heart_rate: number,
-        oxigen_sat: number,
+        patient: string,
+        heartRate: number,
+        spo2: number,
         temperature: number
     ): Promise<Checkup | null> {
         const sql =
-            'INSERT INTO checkup (username, heart_rate, oxigen_sat, temperature) VALUES (?, ?, ?, ?)';
-        const params: any[] = [username, heart_rate, oxigen_sat, temperature];
+            'INSERT INTO checkup (patient, heartRate, spo2, temperature) VALUES (?, ?, ?, ?)';
+        const params: any[] = [patient, heartRate, spo2, temperature];
         try {
             const [result]: any = await query(sql, params);
-            return new Checkup(result.insertId, username, heart_rate, oxigen_sat, temperature);
+            return new Checkup(result.insertId, patient, heartRate, spo2, temperature);
         } catch (error) {
             return null;
         }

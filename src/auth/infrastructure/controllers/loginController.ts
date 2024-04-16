@@ -39,7 +39,7 @@ export class LoginController {
             res.status(200).json({
                 status: 'success',
                 msg: 'Acceso exitoso al sistema',
-                email: user.email,
+                user,
                 token
             });
         } catch (error) {
