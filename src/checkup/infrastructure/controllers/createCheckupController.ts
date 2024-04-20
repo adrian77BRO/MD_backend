@@ -8,7 +8,6 @@ export class CreateCheckupController {
         try {
             const data = req.body;
             const checkup = await this.createCheckupService.run(
-                data.patient,
                 data.heartRate,
                 data.spo2,
                 data.temperature
@@ -17,8 +16,7 @@ export class CreateCheckupController {
                 return res.status(201).send({
                     status: 'success',
                     checkup: {
-                        patient: checkup?.patient,
-                        heart_rate: checkup?.heartRate,
+                        heartRate: checkup?.heartRate,
                         spo2: checkup?.spo2,
                         temperature: checkup?.temperature
                     },

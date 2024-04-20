@@ -12,7 +12,6 @@ export class MysqlCheckupRepository implements CheckupRepository {
                 (checkup: any) => (
                     new Checkup(
                         checkup.id,
-                        checkup.patient,
                         checkup.heartRate,
                         checkup.spo2,
                         checkup.temperature
@@ -31,7 +30,6 @@ export class MysqlCheckupRepository implements CheckupRepository {
             const [result]: any = await query(sql, params);
             return new Checkup(
                 result[0].id,
-                result[0].patient,
                 result[0].heartRate,
                 result[0].spo2,
                 result[0].temperature
@@ -42,17 +40,16 @@ export class MysqlCheckupRepository implements CheckupRepository {
     }
 
     async createCheckup(
-        patient: string,
         heartRate: number,
         spo2: number,
         temperature: number
     ): Promise<Checkup | null> {
         const sql =
-            'INSERT INTO checkup (patient, heartRate, spo2, temperature) VALUES (?, ?, ?, ?)';
-        const params: any[] = [patient, heartRate, spo2, temperature];
+            'INSERT INTO checkup (heartRate, spo2, temperature) VALUES (?, ?, ?)';
+        const params: any[] = [heartRate, spo2, temperature];
         try {
             const [result]: any = await query(sql, params);
-            return new Checkup(result.insertId, patient, heartRate, spo2, temperature);
+            return new Checkup(result.insertId, heartRate, spo2, temperature);
         } catch (error) {
             return null;
         }

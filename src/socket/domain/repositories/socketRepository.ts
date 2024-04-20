@@ -1,7 +1,6 @@
-import { Event } from '../entities/event';
-import { Checkup } from '../../../checkup/domain/entities/checkup';
-
+import { Event } from '../entities/events';
+import { CheckupInfo } from '../../../checkup/domain/entities/checkupInfo';
 export interface SocketRepository {
     connect(): Promise<any>;
-    notify(event: Event, notif: Checkup): Promise<void>;
+    notify(event: Event, notif: CheckupInfo): Promise<void>;
 }

@@ -1,6 +1,6 @@
 import { SocketRepository } from '../domain/repositories/socketRepository';
-import { Event } from '../domain/entities/event';
-import { Checkup } from '../../checkup/domain/entities/checkup';
+import { Event } from '../domain/entities/events';
+import { CheckupInfo } from '../../checkup/domain/entities/checkupInfo';
 import { Socket, io } from 'socket.io-client';
 
 export class SocketIORepository implements SocketRepository {
@@ -17,7 +17,7 @@ export class SocketIORepository implements SocketRepository {
         })
     }
 
-    async notify(eventEmit: Event, notif: Checkup): Promise<void> {
+    async notify(eventEmit: Event, notif: CheckupInfo): Promise<void> {
         return new Promise<void>(async (resolve, reject) => {
             try {
                 const socket = await this.connect();

@@ -13,8 +13,7 @@ export class GetCheckupController {
                     status: 'success',
                     checkups: checkups.map((checkup: any) => {
                         return {
-                            username: checkup.username,
-                            heart_rate: checkup.heart_rate,
+                            heartRate: checkup.heartRate,
                             spo2: checkup.spo2,
                             temperature: checkup.temperature
                         };

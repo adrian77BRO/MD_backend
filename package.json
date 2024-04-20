@@ -30,6 +30,7 @@
     "mysql": "^2.18.1",
     "mysql2": "^3.9.2",
     "nodemailer": "^6.9.12",
+    "socket.io-client": "^4.7.5",
     "zod": "^3.22.4"
   }
 }
