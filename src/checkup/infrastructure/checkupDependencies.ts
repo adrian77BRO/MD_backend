@@ -9,7 +9,7 @@ import { CreateCheckupController } from './controllers/createCheckupController';
 import { GetCheckupController } from './controllers/getCheckupController';
 
 export const mysqlCheckupRepository = new MysqlCheckupRepository();
-export const socketIORepository = new SocketIORepository('http://localhost:8080/');
+export const socketIORepository = new SocketIORepository('http://54.84.1.3:8080/');
 export const sendNotificationService = new SendNotificationService(socketIORepository);
 
 export const createCheckupService = new CreateCheckupService(mysqlCheckupRepository, sendNotificationService);
